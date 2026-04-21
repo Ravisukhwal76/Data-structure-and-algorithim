@@ -1,0 +1,12 @@
+// Returns the largest element in the array
+public static int largestElementInArray(int[] arr) {
+    int largestElement = Integer.MIN_VALUE;
+
+    for (int val : arr) {
+        if (largestElement < val) {
+            largestElement = val;
+        }
+    }
+
+    return largestElement;
+}
