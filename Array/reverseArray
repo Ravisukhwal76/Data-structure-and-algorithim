@@ -1,0 +1,14 @@
+// Reverses the array in-place
+public static void reverseArray(int[] arr) {
+    int low = 0;
+    int high = arr.length - 1;
+
+    while (high > low) {
+        int temp = arr[high];
+        arr[high] = arr[low];
+        arr[low] = temp;
+
+        high--;
+        low++;
+    }
+}
