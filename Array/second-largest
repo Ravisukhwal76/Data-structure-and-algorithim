@@ -1,0 +1,16 @@
+// Returns the second largest unique element in the array
+public static int secondLargestValueInArray(int[] arr) {
+    int largestElement = Integer.MIN_VALUE;
+    int secondLargestElement = Integer.MIN_VALUE;
+
+    for (int val : arr) {
+        if (largestElement < val) {
+            secondLargestElement = largestElement;
+            largestElement = val;
+        } else if (secondLargestElement < val && val != largestElement) {
+            secondLargestElement = val;
+        }
+    }
+
+    return secondLargestElement;
+}
