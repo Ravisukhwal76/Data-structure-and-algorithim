@@ -1,0 +1,25 @@
+public static void leftRotateByOne(int[] arr, int k) {
+    int n = arr.length - 1;
+
+    // Step 1: reverse first k elements
+    reverse(0, k - 1, arr);
+
+    // Step 2: reverse remaining elements
+    reverse(k, n, arr);
+
+    // Step 3: reverse whole array
+    reverse(0, n, arr);
+}
+
+public static void reverse(int start, int end, int[] arr) {
+    int i = start;
+    int j = end;
+
+    while (i < j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        i++;
+        j--;
+    }
+}
