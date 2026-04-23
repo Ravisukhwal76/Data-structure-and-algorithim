@@ -1,0 +1,13 @@
+public static void moveZero(int[] arr) {
+    int insertPos = 0;
+
+    for (int num : arr) {
+        if (num != 0) {
+            arr[insertPos++] = num;
+        }
+    }
+
+    while (insertPos < arr.length) {
+        arr[insertPos++] = 0;
+    }
+}
