@@ -2,7 +2,8 @@ public static void leaderInArray(int arr[]) {
     int n = arr.length;
 
     int currentLeader = arr[n - 1];
-    System.out.print(currentLeader + " "); // print last element
+    System.out.print(currentLeader + " ");
+    // print last element
 
     for (int i = n - 2; i >= 0; i--) {
         if (arr[i] > currentLeader) {
