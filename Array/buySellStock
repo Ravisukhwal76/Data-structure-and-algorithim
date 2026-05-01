@@ -1,0 +1,66 @@
+/*
+========================================
+Buy & Sell Stock
+========================================
+
+Problem:
+Find the maximum profit from stock prices
+when multiple transactions are allowed.
+
+Logic:
+- If today's price is greater than yesterday's,
+  then we take the profit.
+- Add all positive differences.
+
+Why?
+Because every increasing sequence can be
+treated as separate profitable transactions.
+
+Time Complexity  : O(n)
+Space Complexity : O(1)
+
+Example:
+Input  : [1, 5, 3, 8, 12]
+Profit :
+(5-1) + (8-3) + (12-8)
+= 4 + 5 + 4
+= 13
+
+----------------------------------------
+Dry Run:
+arr = [1, 5, 3, 8]
+
+i = 1 → profit = 5 - 1 = 4
+maxProfit = 4
+
+i = 2 → profit = 3 - 5 = -2
+ignore
+
+i = 3 → profit = 8 - 3 = 5
+maxProfit = 9
+
+Output = 9
+========================================
+*/
+
+public static void buySellStock(int[] arr){
+
+    // Stores final maximum profit
+    int maxProfit = 0;
+
+    // Start from index 1 because
+    // we compare with previous day
+    for(int i = 1; i < arr.length; i++){
+
+        // Calculate today's profit
+        int profit = arr[i] - arr[i - 1];
+
+        // Add only positive profit
+        if(arr[i] > arr[i - 1]){
+            maxProfit += profit;
+        }
+    }
+
+    // Print final answer
+    System.out.println(maxProfit);
+}
