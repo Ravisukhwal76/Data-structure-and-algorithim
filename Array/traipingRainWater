@@ -1,0 +1,79 @@
+/*
+========================================
+Trapping Rain Water Problem
+========================================
+
+Problem:
+Find how much rain water can be trapped
+between buildings after raining.
+
+Approach Used:
+Prefix Max + Suffix Max Arrays
+
+Concept:
+Water trapped at any index depends on:
+
+min(leftMax, rightMax) - currentHeight
+
+Where:
+- leftMax  = tallest building on left side
+- rightMax = tallest building on right side
+
+----------------------------------------
+Step 1:
+Create prefix max array (right_max)
+Stores maximum height from left → right
+
+Step 2:
+Create suffix max array (left_max)
+Stores maximum height from right → left
+
+Step 3:
+Calculate trapped water at each index
+
+----------------------------------------
+Time Complexity  : O(n)
+Space Complexity : O(n)
+  
+
+public static void traipingRainWater(int[] arr){
+
+    int n = arr.length;
+
+    // Stores maximum height from left side
+    int[] right_max = new int[n];
+
+    // Stores maximum height from right side
+    int[] left_max = new int[n];
+
+    // Initialize first element
+    right_max[0] = arr[0];
+
+    // Build prefix max array
+    for(int i = 1; i < arr.length; i++){
+        right_max[i] = Math.max(right_max[i - 1], arr[i]);
+    }
+
+    // Initialize last element
+    left_max[n - 1] = arr[n - 1];
+
+    // Build suffix max array
+    for(int i = n - 2; i >= 0; i--){
+        left_max[i] = Math.max(left_max[i + 1], arr[i]);
+    }
+
+    // Stores total trapped water
+    int total_trap_water = 0;
+
+    // Calculate trapped water
+    for(int i = 0; i < n; i++){
+
+        int current_trap =
+            Math.min(left_max[i], right_max[i]) - arr[i];
+
+        total_trap_water += current_trap;
+    }
+
+    // Print final trapped water
+    System.out.println(total_trap_water);
+}
