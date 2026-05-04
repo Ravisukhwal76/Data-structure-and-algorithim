@@ -1,0 +1,62 @@
+/*
+========================================
+Maximum Consecutive 1s in Array
+========================================
+
+Problem:
+Find the maximum number of consecutive 1s
+in a binary array.
+
+----------------------------------------
+Optimized Approach (Best & Simple)
+
+Logic:
+- Traverse the array
+- If element is 1 → increase count
+- If element is 0 → reset count
+- Track maximum count
+
+----------------------------------------
+Time Complexity  : O(n)
+Space Complexity : O(1)
+
+========================================
+Example:
+Input:
+[1, 1, 0, 1, 1, 1]
+
+Output:
+3
+
+========================================
+Dry Run:
+
+count = 0, max = 0
+
+1 → count = 1 → max = 1
+1 → count = 2 → max = 2
+0 → count = 0
+1 → count = 1 → max = 2
+1 → count = 2 → max = 2
+1 → count = 3 → max = 3
+
+========================================
+*/
+
+public static void consecutiveOnes(int[] arr){
+
+    int count = 0;      // current streak
+    int maxCount = 0;  // best result
+
+    for(int i = 0; i < arr.length; i++){
+
+        if(arr[i] == 1){
+            count++; // increase streak
+            maxCount = Math.max(maxCount, count);
+        }else{
+            count = 0; // reset if 0
+        }
+    }
+
+    System.out.println(maxCount);
+}
