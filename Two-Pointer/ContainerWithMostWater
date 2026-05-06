@@ -1,0 +1,90 @@
+/*
+========================================
+Container With Most Water
+========================================
+
+Problem:
+Given an array where each element represents
+height of a line, find two lines that together
+form a container that holds maximum water.
+
+----------------------------------------
+Optimized Approach:
+Two Pointer Technique
+
+Why?
+- Brute force → O(n^2)
+- Optimized → O(n)
+
+----------------------------------------
+Logic:
+- Start with two pointers:
+    left  = 0
+    right = n - 1
+
+- Area = width * min(height[left], height[right])
+       = (right - left) * min(h[l], h[r])
+
+- Move pointer with smaller height:
+    because moving larger one will never
+    increase area
+
+----------------------------------------
+Time Complexity  : O(n)
+Space Complexity : O(1)
+
+========================================
+Example:
+Input:
+[1,8,6,2,5,4,8,3,7]
+
+Output:
+49
+
+Explanation:
+Between index 1 (8) and index 8 (7)
+Width = 7
+Height = min(8,7) = 7
+Area = 7 * 7 = 49
+
+========================================
+Dry Run (Short):
+
+left = 0, right = 8
+area = 8 * min(1,7) = 8
+
+move left → smaller height
+
+left = 1, right = 8
+area = 7 * min(8,7) = 49 (max)
+
+========================================
+*/
+
+public int maxArea(int[] height) {
+
+    int max_water = 0;
+
+    // Two pointers
+    int left = 0;
+    int right = height.length - 1;
+
+    while (left < right) {
+
+        // Calculate current water
+        int currWater =
+            (right - left) * Math.min(height[left], height[right]);
+
+        // Update max
+        max_water = Math.max(max_water, currWater);
+
+        // Move pointer with smaller height
+        if (height[left] < height[right]) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+
+    return max_water;
+}
