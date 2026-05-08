@@ -6,7 +6,6 @@ Maximum Subarray Sum (Kadane's Algorithm)
 Problem:
 Find the contiguous subarray with the
 largest sum.
-
 ----------------------------------------
 Optimized Approach:
 Kadane’s Algorithm
