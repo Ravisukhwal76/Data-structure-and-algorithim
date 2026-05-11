@@ -1,0 +1,96 @@
+/*
+========================================
+Circular Subarray Sum
+========================================
+
+Problem:
+Find maximum sum in circular array.
+
+----------------------------------------
+Logic:
+1. Find normal maximum subarray sum
+   using Kadane’s Algorithm
+
+2. Find circular sum:
+   totalArraySum - minimumSubarraySum
+
+3. Return maximum of both
+
+----------------------------------------
+Time Complexity  : O(n)
+Space Complexity : O(1)
+
+========================================
+Example:
+Input:
+[8, -4, 3, -5, 4]
+
+Normal Max   = 8
+Circular Max = 12
+
+Output:
+12
+
+========================================
+*/
+
+
+// Maximum Subarray Sum (Kadane)
+public static int maxSubArraySum(int[] arr){
+
+    int currMax = arr[0];
+    int globalMax = arr[0];
+
+    for(int i = 1; i < arr.length; i++){
+
+        currMax = Math.max(arr[i], currMax + arr[i]);
+
+        globalMax = Math.max(globalMax, currMax);
+    }
+
+    return globalMax;
+}
+
+
+// Minimum Subarray Sum
+public static int minSubArraySum(int[] arr){
+
+    int currMin = arr[0];
+    int globalMin = arr[0];
+
+    for(int i = 1; i < arr.length; i++){
+
+        currMin = Math.min(arr[i], currMin + arr[i]);
+
+        globalMin = Math.min(globalMin, currMin);
+    }
+
+    return globalMin;
+}
+
+
+// Circular Subarray Sum
+public static void circularSubArraySum(int[] arr){
+
+    // Normal maximum subarray
+    int normalMax = maxSubArraySum(arr);
+
+    // If all elements are negative
+    if(normalMax < 0){
+        System.out.println(normalMax);
+        return;
+    }
+
+    // Total array sum
+    int totalSum = 0;
+
+    for(int val : arr){
+        totalSum += val;
+    }
+
+    // Circular maximum sum
+    int circularMax = totalSum - minSubArraySum(arr);
+
+    // Final answer
+    System.out.println(Math.max(normalMax, circularMax));
+}
