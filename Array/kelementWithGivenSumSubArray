@@ -1,0 +1,112 @@
+/*
+========================================
+Maximum Sum of K Size Subarray
+========================================
+
+Problem:
+Find maximum sum of subarray
+having size k.
+
+----------------------------------------
+1. Brute Force Approach
+----------------------------------------
+
+Logic:
+- Generate every subarray of size k
+- Calculate sum
+- Track maximum sum
+
+Time Complexity  : O(n * k)
+Space Complexity : O(1)
+
+========================================
+*/
+
+public static void kelementWithGivenSumSubArray(int k, int[] arr){
+
+    int n = arr.length;
+
+    int max = Integer.MIN_VALUE;
+
+    for(int i = 0; i < n; i++){
+
+        int temp = k;
+        int sum = 0;
+        int index = i;
+
+        // Calculate k size window sum
+        while(temp > 0 && index < n){
+
+            sum += arr[index++];
+            temp--;
+        }
+
+        // Valid window
+        if(temp == 0){
+            max = Math.max(max, sum);
+        }
+    }
+
+    System.out.println(max);
+}
+
+
+
+/*
+========================================
+2. Optimized Approach
+(Sliding Window Technique)
+========================================
+
+Logic:
+- Calculate first window sum
+- Slide window:
+    add next element
+    remove previous element
+- Track maximum sum
+
+Time Complexity  : O(n)
+Space Complexity : O(1)
+
+========================================
+Example:
+Input:
+arr = [1,8,30,-5,20,7]
+k = 3
+
+Windows:
+1+8+30 = 39
+8+30-5 = 33
+30-5+20 = 45
+-5+20+7 = 22
+
+Output:
+45
+
+========================================
+*/
+
+public static void kelementWithGivenSumSubArray(int k, int[] arr){
+
+    int n = arr.length;
+
+    // First window sum
+    int currWindowSum = 0;
+
+    for(int i = 0; i < k; i++){
+        currWindowSum += arr[i];
+    }
+
+    int res = currWindowSum;
+
+    // Slide window
+    for(int i = k; i < n; i++){
+
+        currWindowSum =
+            currWindowSum + arr[i] - arr[i - k];
+
+        res = Math.max(res, currWindowSum);
+    }
+
+    System.out.println(res);
+}
